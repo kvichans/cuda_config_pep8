@@ -1,0 +1,12 @@
+[info]
+title=Configure pep8 linter
+desc=Configure pep8 linter
+type=cudatext-plugin
+subdir=cuda_config_pep8
+homepage=https://github.com/kvichans/cuda_config_pep8
+
+[item10]
+section=commands
+caption=CudaLint\Configure pep8...
+method=dlg
+;menu=0
