@@ -3,6 +3,6 @@ It is helper for "Linter for Python using PEP8". It configurates PEP8 with dialo
 
 - Windows: c:\Users\name_here\.pep8
 - Unixes: ~/.config/pep8 
-          (or value of var XDG_CONFIG_HOME is used, if found)
+  (if env var XDG_CONFIG_HOME is found, it is used instead of ~/.config)
 
 Author: Andrey Kvichanskiy (kvichans, at forum/github)
