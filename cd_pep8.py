@@ -142,7 +142,7 @@ class Command:
         maxl    = pepdata.get('max-line-length', 80)
 #       maxl    = 80
         while True:
-            aid,vals,chds   = dlg_wrapper(_('Cunfigure PEP8'), 860+10,645+10,
+            aid,vals,chds   = dlg_wrapper(_('PEP8 Config'), 860+10,645+10,
                  [
                   dict(           tp='lb'       ,t=5            ,l=5        ,w=450      ,cap  =f(_('Ignore in "{}"'), GROUPS[0])    )
                  ,dict(cid='wht1',tp='ch-lbx'   ,t=25    ,h=270 ,l=5        ,w=450      ,items=grciphs[0]                           )
