@@ -5,8 +5,8 @@ type=cudatext-plugin
 subdir=cuda_config_pep8
 homepage=https://github.com/kvichans/cuda_config_pep8
 
-[item10]
+[item100]
 section=commands
-caption=CudaLint\Configure pep8...
+caption=CudaLint\PEP8 linter config...
 method=dlg
 ;menu=0

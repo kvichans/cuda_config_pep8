@@ -2,7 +2,7 @@
 Authors:
     Andrey Kvichansky    (kvichans on github.com)
 Version:
-    '1.0.6 2016-06-23'
+    '0.8.1 2016-07-07'
 ToDo: (see end of file)
 '''
 
@@ -142,27 +142,27 @@ class Command:
         maxl    = pepdata.get('max-line-length', 80)
 #       maxl    = 80
         while True:
-            aid,vals,chds   = dlg_wrapper(_('Cunfigure Pep8'), 860+10,700+10,
+            aid,vals,chds   = dlg_wrapper(_('Cunfigure PEP8'), 860+10,645+10,
                  [
                   dict(           tp='lb'       ,t=5            ,l=5        ,w=450      ,cap  =f(_('Ignore in "{}"'), GROUPS[0])    )
-                 ,dict(cid='wht1',tp='ch-lbx'   ,t=25    ,h=295 ,l=5        ,w=450      ,items=grciphs[0]                           )
-                 ,dict(           tp='lb'       ,t=30+300       ,l=5        ,w=450      ,cap  =f(_('Ignore in "{}"'), GROUPS[1])    )
-                 ,dict(cid='wht2',tp='ch-lbx'   ,t=50+300,h=345 ,l=5        ,w=450      ,items=grciphs[1]                           )
+                 ,dict(cid='wht1',tp='ch-lbx'   ,t=25    ,h=270 ,l=5        ,w=450      ,items=grciphs[0]                           )
+                 ,dict(           tp='lb'       ,t=30+275       ,l=5        ,w=450      ,cap  =f(_('Ignore in "{}"'), GROUPS[1])    )
+                 ,dict(cid='wht2',tp='ch-lbx'   ,t=50+275,h=315 ,l=5        ,w=450      ,items=grciphs[1]                           )
                  ,dict(           tp='lb'       ,t=5            ,l=450+15   ,w=400      ,cap  =f(_('Ignore in "{}"'), GROUPS[2])    )
                  ,dict(cid='wht3',tp='ch-lbx'   ,t=25    ,h=105 ,l=450+15   ,w=400      ,items=grciphs[2]                           )
                  ,dict(           tp='lb'       ,t=140          ,l=450+15   ,w=200      ,cap  =f(_('Ignore in "{}"'), GROUPS[3])    )
-                 ,dict(cid='wht4',tp='ch-lbx'   ,t=160   ,h=55  ,l=450+15   ,w=400      ,items=grciphs[3]                           )
+                 ,dict(cid='wht4',tp='ch-lbx'   ,t=160   ,h= 55 ,l=450+15   ,w=400      ,items=grciphs[3]                           )
                  ,dict(           tp='lb'       ,tid='maxl'     ,l=450+15   ,w=400      ,cap  =f(_('Ignore in "{}"'), GROUPS[4])    )
                  ,dict(           tp='lb'       ,tid='maxl'     ,l=450+255  ,w=100      ,cap  =_('Max length:')                     )
-                 ,dict(cid='maxl',tp='sp-ed'    ,t=225          ,l=450+365  ,w= 50      ,props='80,200,10'                          )
-                 ,dict(cid='wht5',tp='ch-lbx'   ,t=250   ,h=70  ,l=450+15   ,w=400      ,items=grciphs[4]                           )
-                 ,dict(           tp='lb'       ,t=330          ,l=450+15   ,w=400      ,cap  =f(_('Ignore in "{}"'), GROUPS[5])    )
-                 ,dict(cid='wht6',tp='ch-lbx'   ,t=350   ,h=95  ,l=450+15   ,w=400      ,items=grciphs[5]                           )
-                 ,dict(           tp='lb'       ,t=455          ,l=450+15   ,w=400      ,cap  =f(_('Ignore in "{}"'), GROUPS[6])    )
-                 ,dict(cid='wht7',tp='ch-lbx'   ,t=475   ,h=195 ,l=450+15   ,w=400      ,items=grciphs[6]                           )
-                 ,dict(cid='defs',tp='bt'       ,t=5+700-28     ,l=5+860-250,w=80       ,cap=_('Defaults')                                )
-                 ,dict(cid='!'   ,tp='bt'       ,t=5+700-28     ,l=5+860-165,w=80       ,cap=_('OK')        ,props='1'              ) # default
-                 ,dict(cid='-'   ,tp='bt'       ,t=5+700-28     ,l=5+860-80 ,w=80       ,cap=_('Cancel')                            )
+                 ,dict(cid='maxl',tp='sp-ed'    ,t=225          ,l=450+350  ,w= 65      ,props='80,200,10'                          )
+                 ,dict(cid='wht5',tp='ch-lbx'   ,t=250   ,h= 45 ,l=450+15   ,w=400      ,items=grciphs[4]                           )
+                 ,dict(           tp='lb'       ,t=305          ,l=450+15   ,w=400      ,cap  =f(_('Ignore in "{}"'), GROUPS[5])    )
+                 ,dict(cid='wht6',tp='ch-lbx'   ,t=325   ,h= 75 ,l=450+15   ,w=400      ,items=grciphs[5]                           )
+                 ,dict(           tp='lb'       ,t=410          ,l=450+15   ,w=400      ,cap  =f(_('Ignore in "{}"'), GROUPS[6])    )
+                 ,dict(cid='wht7',tp='ch-lbx'   ,t=430   ,h=180 ,l=450+15   ,w=400      ,items=grciphs[6]                           )
+                 ,dict(cid='defs',tp='bt'       ,t=5+645-28     ,l=5+860-250,w=80       ,cap=_('Defaults')                                )
+                 ,dict(cid='!'   ,tp='bt'       ,t=5+645-28     ,l=5+860-165,w=80       ,cap=_('OK')        ,props='1'              ) # default
+                 ,dict(cid='-'   ,tp='bt'       ,t=5+645-28     ,l=5+860-80 ,w=80       ,cap=_('Cancel')                            )
                  ]
                  ,     dict(wht1=(-1,[('1' if nm[:4] in igns else '0') for nm in grciphs[0]])
                            ,wht2=(-1,[('1' if nm[:4] in igns else '0') for nm in grciphs[1]])
