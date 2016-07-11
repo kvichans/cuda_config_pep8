@@ -3,6 +3,8 @@ Authors:
     Andrey Kvichansky    (kvichans on github.com)
 Version:
     '0.8.1 2016-07-07'
+PEP8
+    pep8.readthedocs.io/en/1.4.6/intro.html
 ToDo: (see end of file)
 '''
 
@@ -154,7 +156,7 @@ class Command:
                  ,dict(cid='wht4',tp='ch-lbx'   ,t=160   ,h= 55 ,l=450+15   ,w=400      ,items=grciphs[3]                           )
                  ,dict(           tp='lb'       ,tid='maxl'     ,l=450+15   ,w=400      ,cap  =f(_('Ignore in "{}"'), GROUPS[4])    )
                  ,dict(           tp='lb'       ,tid='maxl'     ,l=450+255  ,w=100      ,cap  =_('Max length:')                     )
-                 ,dict(cid='maxl',tp='sp-ed'    ,t=225          ,l=450+350  ,w= 65      ,props='80,200,10'                          )
+                 ,dict(cid='maxl',tp='sp-ed'    ,t=225          ,l=450+350  ,w= 65      ,props='70,200,1'                           )
                  ,dict(cid='wht5',tp='ch-lbx'   ,t=250   ,h= 45 ,l=450+15   ,w=400      ,items=grciphs[4]                           )
                  ,dict(           tp='lb'       ,t=305          ,l=450+15   ,w=400      ,cap  =f(_('Ignore in "{}"'), GROUPS[5])    )
                  ,dict(cid='wht6',tp='ch-lbx'   ,t=325   ,h= 75 ,l=450+15   ,w=400      ,items=grciphs[5]                           )
