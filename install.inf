@@ -1,12 +1,12 @@
 [info]
-title=Configure PEP8 linter
-desc=Shows dialog to configure PEP8 linter, and save its config
+title=Configure PyCodeStyle linter
+desc=Shows dialog to configure PyCodeStyle linter, and save its config
 type=cudatext-plugin
 subdir=cuda_config_pep8
 homepage=https://github.com/kvichans/cuda_config_pep8
 
 [item1]
 section=commands
-caption=CudaLint\PEP8 linter config...
+caption=CudaLint\Configure PyCodeStyle linter...
 method=dlg
 ;menu=0
