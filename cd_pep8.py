@@ -152,6 +152,7 @@ GROUPS  = { 0:'Indentation'
           , 4:'Line length'
           , 5:'Deprecation'
           , 6:'Statement'
+          , 8:'Runtime'
             }
 grciphs = {gr:[ciph+' '+nm for (ciph, nm) in CIPHS.items() if ciph[:2] in ['E'+str(1+gr), 'W'+str(1+gr)]] for gr in GROUPS}
 
@@ -172,16 +173,18 @@ class Command:
                  ,dict(cid='wht2',tp='ch-lbx'   ,t=50+275,h=315 ,l=5        ,w=450      ,items=grciphs[1]                           )
                  ,dict(           tp='lb'       ,t=5            ,l=450+15   ,w=400      ,cap  =f(_('Ignore in "{}"'), GROUPS[2])    )
                  ,dict(cid='wht3',tp='ch-lbx'   ,t=25    ,h=105 ,l=450+15   ,w=400      ,items=grciphs[2]                           )
-                 ,dict(           tp='lb'       ,t=140          ,l=450+15   ,w=200      ,cap  =f(_('Ignore in "{}"'), GROUPS[3])    )
-                 ,dict(cid='wht4',tp='ch-lbx'   ,t=160   ,h= 55 ,l=450+15   ,w=400      ,items=grciphs[3]                           )
+                 ,dict(           tp='lb'       ,t=135          ,l=450+15   ,w=200      ,cap  =f(_('Ignore in "{}"'), GROUPS[3])    )
+                 ,dict(cid='wht4',tp='ch-lbx'   ,t=155   ,h= 50 ,l=450+15   ,w=400      ,items=grciphs[3]                           )
                  ,dict(           tp='lb'       ,tid='maxl'     ,l=450+15   ,w=400      ,cap  =f(_('Ignore in "{}"'), GROUPS[4])    )
                  ,dict(           tp='lb'       ,tid='maxl'     ,l=450+255  ,w=100      ,cap  =_('Max length:')                     )
-                 ,dict(cid='maxl',tp='sp-ed'    ,t=225          ,l=450+350  ,w= 65      ,props='70,200,1'                           )
-                 ,dict(cid='wht5',tp='ch-lbx'   ,t=250   ,h= 45 ,l=450+15   ,w=400      ,items=grciphs[4]                           )
+                 ,dict(cid='maxl',tp='sp-ed'    ,t=210          ,l=450+350  ,w= 65      ,props='70,200,1'                           )
+                 ,dict(cid='wht5',tp='ch-lbx'   ,t=235   ,h= 60 ,l=450+15   ,w=400      ,items=grciphs[4]                           )
                  ,dict(           tp='lb'       ,t=305          ,l=450+15   ,w=400      ,cap  =f(_('Ignore in "{}"'), GROUPS[5])    )
                  ,dict(cid='wht6',tp='ch-lbx'   ,t=325   ,h= 75 ,l=450+15   ,w=400      ,items=grciphs[5]                           )
                  ,dict(           tp='lb'       ,t=410          ,l=450+15   ,w=400      ,cap  =f(_('Ignore in "{}"'), GROUPS[6])    )
-                 ,dict(cid='wht7',tp='ch-lbx'   ,t=430   ,h=180 ,l=450+15   ,w=400      ,items=grciphs[6]                           )
+                 ,dict(cid='wht7',tp='ch-lbx'   ,t=430   ,h= 90 ,l=450+15   ,w=400      ,items=grciphs[6]                           )
+                 ,dict(           tp='lb'       ,t=530          ,l=450+15   ,w=400      ,cap  =f(_('Ignore in "{}"'), GROUPS[8])    )
+                 ,dict(cid='wht7',tp='ch-lbx'   ,t=550   ,h= 60 ,l=450+15   ,w=400      ,items=grciphs[8]                           )
                  ,dict(cid='defs',tp='bt'       ,t=5+645-28     ,l=5+860-250,w=80       ,cap=_('Defaults')                                )
                  ,dict(cid='!'   ,tp='bt'       ,t=5+645-28     ,l=5+860-165,w=80       ,cap=_('OK')        ,props='1'              ) # default
                  ,dict(cid='-'   ,tp='bt'       ,t=5+645-28     ,l=5+860-80 ,w=80       ,cap=_('Cancel')                            )
