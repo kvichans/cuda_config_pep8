@@ -3,7 +3,7 @@ Authors:
     Andrey Kvichansky    (kvichans on github.com)
     Alexey Torgashin (CudaText)
 Version:
-    '0.8.2 2019-05-05'
+    '0.8.3 2019-05-06'
 PyCodeStyle docs:
     http://pycodestyle.pycqa.org/en/stable/
 ToDo: (see end of file)
@@ -27,11 +27,11 @@ pass;                          #pfrm15=lambda d:pformat(d,width=15)
 pass;                           LOG = (-2==-2)  # Do or dont logging.
 pass;                           ##!! waits correction
 
-PEP8_CONFIG = os.path.expanduser(r'~\.pep8') \
-                if sys.platform == 'win32' else \
+CONFIG_NAME = os.path.expanduser(r'~\.pycodestyle') \
+              if os.name == 'nt' else \
               os.path.join(
                 os.getenv('XDG_CONFIG_HOME') or os.path.expanduser('~/.config'),
-                'pep8'
+                'pycodestyle'
               )
 CIPHS   = {
     # Indentation
@@ -159,13 +159,13 @@ grciphs = {gr:[ciph+' '+nm for (ciph, nm) in CIPHS.items() if ciph[:2] in ['E'+s
 class Command:
     
     def dlg(self):
-        pepdata = get_pep8_data()
+        pepdata = get_data()
         igns    = pepdata.get('ignore', DEF_IGNORE)
         pass;                  #LOG and log('igns={}',(igns))
         maxl    = pepdata.get('max-line-length', 80)
 #       maxl    = 80
         while True:
-            aid,vals,chds   = dlg_wrapper(_('PEP8 Config'), 860+10,645+10,
+            aid,vals,chds   = dlg_wrapper(_('Configure PyCodeStyle'), 860+10,645+10,
                  [
                   dict(           tp='lb'       ,t=5            ,l=5        ,w=450      ,cap  =f(_('Ignore in "{}"'), GROUPS[0])    )
                  ,dict(cid='wht1',tp='ch-lbx'   ,t=25    ,h=270 ,l=5        ,w=450      ,items=grciphs[0]                           )
@@ -213,37 +213,37 @@ class Command:
                 igns   += [grciphs[4][n][:4] for (n, ch) in enumerate(vals['wht5'][1]) if ch=='1']
                 igns   += [grciphs[5][n][:4] for (n, ch) in enumerate(vals['wht6'][1]) if ch=='1']
                 igns   += [grciphs[6][n][:4] for (n, ch) in enumerate(vals['wht7'][1]) if ch=='1']
-                save_pep8_data({'ignore':igns
+                save_data({'ignore':igns
                                ,'max-line-length':maxl})
                 break#while
            #while
        #def dlg
    #class Command
 
-def get_pep8_data():
-    if not os.path.isfile(PEP8_CONFIG):
+def get_data():
+    if not os.path.isfile(CONFIG_NAME):
         return {}
     config  = configparser.ConfigParser()
-    config.read(PEP8_CONFIG)
-    pass;                      #LOG and log('config["pep8"]["ignore"]={}',(config['pep8']['ignore']))
+    config.read(CONFIG_NAME)
+    pass;                      #LOG and log('config["pycodestyle"]["ignore"]={}',(config['pycodestyle']['ignore']))
     rsp     = {}
-    if config['pep8']['max-line-length']:
-        rsp['max-line-length']  = int(config['pep8']['max-line-length'])
-    raw_ignore  = config['pep8']['ignore']
+    if config['pycodestyle']['max-line-length']:
+        rsp['max-line-length']  = int(config['pycodestyle']['max-line-length'])
+    raw_ignore  = config['pycodestyle']['ignore']
     if raw_ignore:
         raw_ignore  = raw_ignore.replace(' ', '')
         rsp['ignore']           = raw_ignore
     pass;                      #LOG and log('rsp={}',(rsp))
     return rsp
 
-def save_pep8_data(fvdata):
+def save_data(fvdata):
     pass;                      #LOG and log('fvdata={}',(fvdata))
     svd     = {'max-line-length': fvdata['max-line-length']
               ,'ignore':', '.join(fvdata['ignore'])}
     pass;                      #LOG and log('svd={}',(svd))
     config  = configparser.ConfigParser()
-    config['pep8']  = svd
-    with open(PEP8_CONFIG, 'w') as configfile:
+    config['pycodestyle']  = svd
+    with open(CONFIG_NAME, 'w') as configfile:
         config.write(configfile)
 
 
