@@ -1,2 +1,7 @@
+0.8.2 (2019-05-05)
+* renamed to "Configure PyCodeStyle"
++ added new PyCodeStyle error codes
++ changed dialog layout for more error codes
+
 0.8.0 (2016-07-06)
-init
+initial version
