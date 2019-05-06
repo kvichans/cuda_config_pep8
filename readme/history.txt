@@ -1,3 +1,6 @@
+0.8.3 (2019-05-06)
+- fixed config file name (.pep8 -> .pycodestyle)
+
 0.8.2 (2019-05-05)
 * renamed to "Configure PyCodeStyle"
 + added new PyCodeStyle error codes
