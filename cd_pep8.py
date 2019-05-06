@@ -1,10 +1,11 @@
-﻿''' Plugin for CudaText editor
+''' Plugin for CudaText editor
 Authors:
     Andrey Kvichansky    (kvichans on github.com)
+    Alexey Torgashin (CudaText)
 Version:
-    '0.8.1 2016-07-07'
-PEP8
-    pep8.readthedocs.io/en/1.4.6/intro.html
+    '0.8.2 2019-05-05'
+PyCodeStyle docs:
+    http://pycodestyle.pycqa.org/en/stable/
 ToDo: (see end of file)
 '''
 
@@ -38,20 +39,22 @@ CIPHS   = {
     ,'E111':'indentation is not a multiple of four'  # '  a = 1'
     ,'E112':'expected an indented block'  # 'for item in items:\npass'
     ,'E113':'unexpected indentation'  # 'a = 1\n    b = 2'
-    ,'E114':'indentation is not a multiple of four'  # '  # a = 1'
-    ,'E115':'expected an indented block'  # 'for item in items:\n# Hi\n    pass'
-    ,'E116':'unexpected indentation'  # 'a = 1\n    # b = 2'
+    ,'E114':'indentation is not a multiple of four (comment)'  # '  # a = 1'
+    ,'E115':'expected an indented block (comment)'  # 'for item in items:\n# Hi\n    pass'
+    ,'E116':'unexpected indentation (comment)'  # 'a = 1\n    # b = 2'
+    ,'E117':'over-indented'
 
-    ,'E121':'continuation line indentation is not a multiple of four'  # 'a = (\n   42)'
+    ,'E121':'continuation line under-indented for hanging indent'  # 'a = (\n   42)'
     ,'E122':'continuation line missing indentation or outdented'  # 'a = (\n42)'
     ,'E123':'closing bracket does not match indentation of opening bracket’s line'  # 'a = (\n    )'
     ,'E124':'closing bracket does not match visual indentation'  # 'a = (24,\n     42\n)'
-    ,'E125':'continuation line does not distinguish itself from next logical line'  # 'if (\n    b):\n    pass'
+    ,'E125':'continuation line with same indent as next logical line'  # 'if (\n    b):\n    pass'
     ,'E126':'continuation line over-indented for hanging indent'  # 'a = (\n        42)'
     ,'E127':'continuation line over-indented for visual indent'  # 'a = (24,\n      42)'
     ,'E128':'continuation line under-indented for visual indent'  # 'a = (24,\n    42)'
-    ,'E129':'visually indented line'  # 'if (a or\n    b):\n    pass'
-    ,'E131':'unaligned for hanging indent'  # 'a = (\n    42\n 24)'
+    ,'E129':'visually indented line with same indent as next logical line'  # 'if (a or\n    b):\n    pass'
+    ,'E131':'continuation line unaligned for hanging indent'  # 'a = (\n    42\n 24)'
+    ,'E133':'closing bracket is missing indentation'
 
     # Whitespace
     ,'E201':'whitespace after ‘(‘'  # 'spam( ham[1], {eggs: 2})'
@@ -66,30 +69,34 @@ CIPHS   = {
     ,'E226':'missing whitespace around arithmetic operator'  # 'c = (a+b) * (a-b)'
     ,'E227':'missing whitespace around bitwise or shift operator'  # 'c = a|b'
     ,'E228':'missing whitespace around modulo operator'  # 'msg = fmt%(errno, errmsg)'
-    ,'E231':'missing whitespace after ‘,’'  # '['a','b']'
+    ,'E231':'missing whitespace after ‘,’, ‘;’, or ‘:’'  # '['a','b']'
     ,'E241':'multiple spaces after ‘,’'  # 'a = (1,  2)'
     ,'E242':'tab after ‘,’'  # 'a = (1,\t2)'
     ,'E251':'unexpected spaces around keyword / parameter equals'  # 'def complex(real, imag = 0.0):'
     ,'E261':'at least two spaces before inline comment'  # 'x = x + 1 # Increment x'
     ,'E262':'inline comment should start with ‘# ‘'  # 'x = x + 1  #  Increment x'
-    ,'E265':'block comment should start with \'# \''  # '#Block comment'
-    ,'E266':'too many leading \'#\' for block comment'  # '### Block comment'
+    ,'E265':'block comment should start with ‘# ‘'  # '#Block comment'
+    ,'E266':'too many leading ‘#‘ for block comment'  # '### Block comment'
     ,'E271':'multiple spaces after keyword'  # 'True and  False'
     ,'E272':'multiple spaces before keyword'  # 'True  and False'
     ,'E273':'tab after keyword'  # 'True and\tFalse'
     ,'E274':'tab before keyword'  # 'True\tand False'
+    ,'E275':'missing whitespace after keyword'
 
     # Blank line
     ,'E301':'expected 1 blank line, found 0'  # 'class Foo:\n    b = 0\n    def bar():\n        pass'
     ,'E302':'expected 2 blank lines, found 0'  # 'def a():\n    pass\n\ndef b(n):\n    pass'
     ,'E303':'too many blank lines (3)'  # 'def a():\n    pass\n\n\n\ndef b(n):\n    pass'
     ,'E304':'blank lines found after function decorator'  # '@decorator\n\ndef a():\n    pass'
+    ,'E305':'expected 2 blank lines after end of function or class'
+    ,'E306':'expected 1 blank line before a nested definition'
 
     # Import
     ,'E401':'multiple imports on one line'  # 'import sys, os'
     ,'E402':'module level import not at top of file'  # ''One string'\n"Two string"\nimport os'
 
     # Line length
+    ,'E501':'line too long (82 > 79 characters)'
     ,'E502':'the backslash is redundant between brackets'  # 'aaa = ("bbb " \\n       "ccc")'
 
     # Statement
@@ -99,16 +106,25 @@ CIPHS   = {
     ,'E704':'multiple statements on one line (def)'  # 'def f(x): return 2*x'
     ,'E711':'comparison to None should be ‘if cond is None:'  # 'if None == arg:'
     ,'E712':'comparison to True should be ‘if cond is True:’ or ‘if cond:’'  # 'if False == arg:'
-    ,'E713':'test for membership should be \'not in\''  # 'Z = not X in Y'
-    ,'E714':'test for object identity should be \'is not\''  # 'Z = not X.B is Y'
+    ,'E713':'test for membership should be ‘not in’'  # 'Z = not X in Y'
+    ,'E714':'test for object identity should be ‘is not’'  # 'Z = not X.B is Y'
     ,'E721':'do not compare types, use ‘isinstance()’'  # 'if type(obj) is type(1):'
+    ,'E722':'do not use bare except, specify exception instead'
     ,'E731':'do not assign a lambda expression, use a def'  # 'f = lambda x: 2*x'
+    ,'E741':'do not use variables named ‘l’, ‘O’, or ‘I’'
+    ,'E742':'do not define classes named ‘l’, ‘O’, or ‘I’'
+    ,'E743':'do not define functions named ‘l’, ‘O’, or ‘I’'
+
+    # Runtime
+    ,'E901':'SyntaxError or IndentationError'
+    ,'E902':'IOError'
 
     # Indentation warning
     ,'W191':'indentation contains tabs'  # 'if True:\n\treturn'
 
     # Whitespace warning
     ,'W291':'trailing whitespace'  # 'spam(1) \n#'
+    ,'W292':'no newline at end of file'
     ,'W293':'blank line contains whitespace'  # 'class Foo(object):\n    \n    bang = 12'
 
     # Blank line warning
@@ -116,12 +132,16 @@ CIPHS   = {
 
     # Line length
     ,'W503':'line break before binary operator'  # '(width == 0\n + height == 0)'
+    ,'W504':'line break after binary operator'
+    ,'W505':'doc line too long (82 > 79 characters)'
 
     # Deprecation warning
     ,'W601':'.has_key() is deprecated, use ‘in’'  # 'assert d.has_key('alph')'
     ,'W602':'deprecated form of raising exception'  # 'raise DummyError, "Message"'
     ,'W603':'‘<>’ is deprecated, use ‘!=’'  # 'if a <> 'no':'
     ,'W604':'backticks are deprecated, use ‘repr()’'  # 'val = `1 + 2`'
+    ,'W605':'invalid escape sequence ‘x’'
+    ,'W606':'‘async’ and ‘await’ are reserved keywords starting with Python 3.7'
 }
 DEF_IGNORE  = ['E121', 'E123', 'E126', 'E226', 'E241', 'E242', 'E704']
 CIPHS   = OrdDict(sorted(CIPHS.items(), key=lambda t: t[0]))
@@ -132,6 +152,7 @@ GROUPS  = { 0:'Indentation'
           , 4:'Line length'
           , 5:'Deprecation'
           , 6:'Statement'
+          , 8:'Runtime'
             }
 grciphs = {gr:[ciph+' '+nm for (ciph, nm) in CIPHS.items() if ciph[:2] in ['E'+str(1+gr), 'W'+str(1+gr)]] for gr in GROUPS}
 
@@ -152,16 +173,18 @@ class Command:
                  ,dict(cid='wht2',tp='ch-lbx'   ,t=50+275,h=315 ,l=5        ,w=450      ,items=grciphs[1]                           )
                  ,dict(           tp='lb'       ,t=5            ,l=450+15   ,w=400      ,cap  =f(_('Ignore in "{}"'), GROUPS[2])    )
                  ,dict(cid='wht3',tp='ch-lbx'   ,t=25    ,h=105 ,l=450+15   ,w=400      ,items=grciphs[2]                           )
-                 ,dict(           tp='lb'       ,t=140          ,l=450+15   ,w=200      ,cap  =f(_('Ignore in "{}"'), GROUPS[3])    )
-                 ,dict(cid='wht4',tp='ch-lbx'   ,t=160   ,h= 55 ,l=450+15   ,w=400      ,items=grciphs[3]                           )
+                 ,dict(           tp='lb'       ,t=135          ,l=450+15   ,w=200      ,cap  =f(_('Ignore in "{}"'), GROUPS[3])    )
+                 ,dict(cid='wht4',tp='ch-lbx'   ,t=155   ,h= 50 ,l=450+15   ,w=400      ,items=grciphs[3]                           )
                  ,dict(           tp='lb'       ,tid='maxl'     ,l=450+15   ,w=400      ,cap  =f(_('Ignore in "{}"'), GROUPS[4])    )
                  ,dict(           tp='lb'       ,tid='maxl'     ,l=450+255  ,w=100      ,cap  =_('Max length:')                     )
-                 ,dict(cid='maxl',tp='sp-ed'    ,t=225          ,l=450+350  ,w= 65      ,props='70,200,1'                           )
-                 ,dict(cid='wht5',tp='ch-lbx'   ,t=250   ,h= 45 ,l=450+15   ,w=400      ,items=grciphs[4]                           )
+                 ,dict(cid='maxl',tp='sp-ed'    ,t=210          ,l=450+350  ,w= 65      ,props='70,200,1'                           )
+                 ,dict(cid='wht5',tp='ch-lbx'   ,t=235   ,h= 60 ,l=450+15   ,w=400      ,items=grciphs[4]                           )
                  ,dict(           tp='lb'       ,t=305          ,l=450+15   ,w=400      ,cap  =f(_('Ignore in "{}"'), GROUPS[5])    )
                  ,dict(cid='wht6',tp='ch-lbx'   ,t=325   ,h= 75 ,l=450+15   ,w=400      ,items=grciphs[5]                           )
                  ,dict(           tp='lb'       ,t=410          ,l=450+15   ,w=400      ,cap  =f(_('Ignore in "{}"'), GROUPS[6])    )
-                 ,dict(cid='wht7',tp='ch-lbx'   ,t=430   ,h=180 ,l=450+15   ,w=400      ,items=grciphs[6]                           )
+                 ,dict(cid='wht7',tp='ch-lbx'   ,t=430   ,h= 90 ,l=450+15   ,w=400      ,items=grciphs[6]                           )
+                 ,dict(           tp='lb'       ,t=530          ,l=450+15   ,w=400      ,cap  =f(_('Ignore in "{}"'), GROUPS[8])    )
+                 ,dict(cid='wht7',tp='ch-lbx'   ,t=550   ,h= 60 ,l=450+15   ,w=400      ,items=grciphs[8]                           )
                  ,dict(cid='defs',tp='bt'       ,t=5+645-28     ,l=5+860-250,w=80       ,cap=_('Defaults')                                )
                  ,dict(cid='!'   ,tp='bt'       ,t=5+645-28     ,l=5+860-165,w=80       ,cap=_('OK')        ,props='1'              ) # default
                  ,dict(cid='-'   ,tp='bt'       ,t=5+645-28     ,l=5+860-80 ,w=80       ,cap=_('Cancel')                            )
